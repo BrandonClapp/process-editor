@@ -638,13 +638,8 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
 
   var processes = [{
     Id: 0,
-    Name: 'FPRecognition'
-  }, {
-    Id: 1,
-    Name: 'Bulk Import'
-  }, {
-    Id: 2,
-    Name: 'Web Index'
+    Name: 'OMG'
+  }
   }];
 
   var nodes = [];
