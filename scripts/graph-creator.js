@@ -33,7 +33,7 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
       .append('svg:path')
       .attr('d', 'M0,-5L10,0L0,5');
 
-    // define arrow markers for leading arrow
+    //define arrow markers for leading arrow
     defs.append('svg:marker')
       .attr('id', 'mark-end-arrow')
       .attr('viewBox', '0 -5 10 10')
@@ -619,48 +619,44 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
   var xLoc = width / 2 - 25,
     yLoc = 100;
 
-  // initial node data
-  // var nodes = [{
-  //   title: "Process Map Step 1",
-  //   id: 0,
-  //   x: xLoc,
-  //   y: yLoc
-  // }, {
-  //   title: "Process Map Step 2",
-  //   id: 1,
-  //   x: xLoc,
-  //   y: yLoc + 200
-  // }];
-  // var edges = [{
-  //   source: nodes[0],
-  //   target: nodes[1]
-  // }];
 
-  var processes = [{
-    Id: 0,
-    Name: 'OMG'
-  }
+    var processes = [{
+      Id: 0,
+      Name: 'FPRecognition'
+    }, {
+      Id: 1,
+      Name: 'Bulk Import'
+    }, {
+      Id: 2,
+      Name: 'Web Index'
+    }, {
+      Id: 3,
+      Name: 'Caching Service',
+    }];
+
+
+  // initial node data
+  var nodes = [{
+    title: "Process Map Step 1",
+    id: 0,
+    x: xLoc,
+    y: yLoc
+  }, {
+    title: "Process Map Step 2",
+    id: 1,
+    x: xLoc,
+    y: yLoc + 200
+  }];
+  var edges = [{
+    source: nodes[0],
+    target: nodes[1]
   }];
 
-  var nodes = [];
-  for(var i = 0; i < processes.length; i++){
-    console.log('loooping');
-    nodes.push({
-      title: processes[i].Name,
-      id: processes[i].Id,
-      x: xLoc,
-      y: yLoc + (200 * i)
-    });
-  }
-
-  console.log('nodes after looping...');
+  console.log('nodes:');
   console.log(nodes);
 
-  var edges = [];
-
-
   /** MAIN SVG **/
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select("div#graph").append("svg")
     .attr("width", width)
     .attr("height", height);
   var graph = new GraphCreator(svg, nodes, edges);

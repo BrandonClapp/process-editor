@@ -1,0 +1,28 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'c:\\Users\\bclapp\\AppData\\Local\\atom\\app-0.176.0\\resources\\app\\apm\\bin\\\\node.exe',
+1 verbose cli   'c:\\Users\\bclapp\\AppData\\Local\\atom\\app-0.176.0\\resources\\app\\apm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   '--globalconfig',
+1 verbose cli   'c:\\Users\\bclapp\\AppData\\Local\\atom\\app-0.176.0\\resources\\app\\apm\\.apmrc',
+1 verbose cli   '--userconfig',
+1 verbose cli   'c:\\Users\\bclapp\\.atom\\.apmrc',
+1 verbose cli   'install',
+1 verbose cli   '--target=0.20.0',
+1 verbose cli   '--arch=ia32',
+1 verbose cli   '--msvs_version=2013' ]
+2 info using npm@2.3.0
+3 info using node@v0.10.35
+4 verbose node symlink c:\Users\bclapp\AppData\Local\atom\app-0.176.0\resources\app\apm\bin\\node.exe
+5 error install Couldn't read dependencies
+6 verbose stack Error: ENOENT, open 'c:\Users\bclapp\Desktop\ProcessMapEditor\package.json'
+7 verbose cwd c:\Users\bclapp\Desktop\ProcessMapEditor
+8 error Windows_NT 6.2.9200
+9 error argv "c:\\Users\\bclapp\\AppData\\Local\\atom\\app-0.176.0\\resources\\app\\apm\\bin\\\\node.exe" "c:\\Users\\bclapp\\AppData\\Local\\atom\\app-0.176.0\\resources\\app\\apm\\node_modules\\npm\\bin\\npm-cli.js" "--globalconfig" "c:\\Users\\bclapp\\AppData\\Local\\atom\\app-0.176.0\\resources\\app\\apm\\.apmrc" "--userconfig" "c:\\Users\\bclapp\\.atom\\.apmrc" "install" "--target=0.20.0" "--arch=ia32" "--msvs_version=2013"
+10 error node v0.10.35
+11 error npm  v2.3.0
+12 error path c:\Users\bclapp\Desktop\ProcessMapEditor\package.json
+13 error code ENOPACKAGEJSON
+14 error errno 34
+15 error package.json ENOENT, open 'c:\Users\bclapp\Desktop\ProcessMapEditor\package.json'
+15 error package.json This is most likely not a problem with npm itself.
+15 error package.json npm can't find a package.json file in your current directory.
+16 verbose exit [ 34, true ]
