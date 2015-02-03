@@ -1,19 +1,21 @@
 <!--Line Graph-->
 
-var h = window.screen.height;
-var w = window.screen.width;
+var h = 250;
+var w = 500;
+
+var padding = 40;
 
 monthlySales = [
-{"month": 10, "sales": 100},
-{"month": 20, "sales": 130},
-{"month": 30, "sales": 250},
-{"month": 40, "sales": 300},
-{"month": 50, "sales": 265},
-{"month": 60, "sales": 225},
-{"month": 70, "sales": 180},
-{"month": 80, "sales": 120},
-{"month": 90, "sales": 145},
-{"month": 100, "sales": 130}
+  {"month": 10, "sales": 100},
+  {"month": 20, "sales": 130},
+  {"month": 30, "sales": 250},
+  {"month": 40, "sales": 300},
+  {"month": 50, "sales": 265},
+  {"month": 60, "sales": 225},
+  {"month": 70, "sales": 180},
+  {"month": 80, "sales": 120},
+  {"month": 90, "sales": 145},
+  {"month": 100, "sales": 130}
 ];
 
 // https://github.com/mbostock/d3/wiki/Quantitative-Scales#linear-scales
@@ -22,11 +24,15 @@ var xScale = d3.scale.linear()
                 d3.min(monthlySales, function(d){ return d.month; }),
                 d3.max(monthlySales, function(d){ return d.month; })
                 ])
-              .range([0, w]);
+              .range([padding, w - padding]);
 
 var yScale = d3.scale.linear()
               .domain([0, d3.max(monthlySales, function(d){ return d.sales })])
-              .range([h, 0]); // inversed because of svg coordinates being reversed.
+              .range([h - padding, 10]); // inversed because of svg coordinates being reversed.
+
+// axis takes a scale
+var yAxisGen = d3.svg.axis().scale(yScale).orient('left');
+var xAxisGen = d3.svg.axis().scale(xScale).orient('bottom');
 
 var lineFun = d3.svg.line()
               .x(function(d) { return xScale(d.month); })
@@ -37,6 +43,16 @@ var svg = d3.select("div#testing").append("svg").attr({
             width: w,
             height: h
           });
+
+// g is svg group element
+// call adds the axis
+// transform moves the group
+var yAxis = svg.append("g").call(yAxisGen)
+              .attr({"transform": "translate(" + padding + ", 0)"});
+var xAxis = svg.append("g").call(xAxisGen)
+              .attr({"transform": "translate(0, " + (h - padding) + ")"});
+
+              console.log(h - padding);
 
 var viz = svg.append("path")
               .attr({
