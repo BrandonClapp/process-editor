@@ -65,7 +65,10 @@ var viz = svg.append("path")
 // add labels
 var labels = svg.selectAll("text").data(monthlySales).enter()
               .append("text")
-              .text(function(d) { return d.sales; })
+              .text(function(d) {
+                console.log(d.sales);
+                return d.sales;
+                })
                 .attr({
                   x: function(d) { return xScale(d.month) - 25; },
                   y: function(d) { return yScale(d.sales); },
