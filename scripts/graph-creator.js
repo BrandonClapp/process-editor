@@ -611,28 +611,21 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
   };
 
   var docEl = document.documentElement,
-    bodyEl = document.getElementsByTagName('body')[0];
+    bodyEl = document.getElementsByTagName('div#editorPanel')[0];
 
-  var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
-    height = window.innerHeight || docEl.clientHeight || bodyEl.clientHeight;
+  // var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
+  //   height = window.innerHeight || docEl.clientHeight || bodyEl.clientHeight;
+
+var editorPanel =  document.getElementsById('#editorPanel')[0];
+
+console.log('editor panel');
+console.log(editorPanel);
+
+  var width = editorPanel.clientWidth;
+  var height = editorPanel.clientHeight;
 
   var xLoc = width / 2 - 25,
     yLoc = 100;
-
-
-    var processes = [{
-      Id: 0,
-      Name: 'FPRecognition'
-    }, {
-      Id: 1,
-      Name: 'Bulk Import'
-    }, {
-      Id: 2,
-      Name: 'Web Index'
-    }, {
-      Id: 3,
-      Name: 'Caching Service',
-    }];
 
 
   // initial node data
@@ -652,11 +645,8 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
     target: nodes[1]
   }];
 
-  console.log('nodes:');
-  console.log(nodes);
-
   /** MAIN SVG **/
-  var svg = d3.select("div#graph").append("svg")
+  var svg = d3.select("div#editorPanel").append("svg")
     .attr("width", width)
     .attr("height", height);
   var graph = new GraphCreator(svg, nodes, edges);
