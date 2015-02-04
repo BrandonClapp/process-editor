@@ -12,52 +12,24 @@
 
 <body>
 
-  <div class="container-fluid">
-    <div class="col-lg-10">
-
-
-
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Process Map Editor</h3>
-        </div>
-        <div class="panel-body" id="editorPanel">
-
-          <!--Svg here-->
-
-        </div>
-      </div>
-
-    </div>
-
-
-    <div class="col-lg-2">
-      <!--Details panel here-->
-
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Details</h3>
-        </div>
-        <div class="panel-body" id="detailsPanel">
-          Panel content
-        </div>
-      </div>
-
-
-    </div>
-
-    <div class="clearfix"></div>
-
-  </div>
-
-  <!-- <div id="graph">
+  <div id="graph">
     <div id="toolbox">
       <input type="file" id="hidden-file-upload">
+      <button id="reset-zoom" class="btn btn-default">Reset Zoom</button>
       <input id="upload-input" type="image" title="upload graph" src="images/upload-icon.png" alt="upload graph">
       <input type="image" id="download-input" title="download graph" src="images/download-icon.png" alt="download graph">
       <input type="image" id="delete-graph" title="delete graph" src="images/trash-icon.png" alt="delete graph">
     </div>
-  </div> -->
+
+    <div id="inspector" class="hidden">
+      <h4>Process Step Details</h4>
+      <select id="processes">
+        <option value="process1">Process Step 1</option>
+        <option value="process2">Process Step 2</option>
+        <option value="process3">Process Step 3</option>
+      </select>
+    </div>
+  </div>
 
   <script src="scripts/d3.v3.js" charset="utf-8"></script>
   <script src="scripts/FileSaver.min.js"></script>

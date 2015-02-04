@@ -32,6 +32,19 @@ body{
   z-index: 5;
 }
 
+#inspector{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-bottom: 0.5em;
+  margin-left: 1em;
+  border: 2px solid #EEEEEE;
+  border-radius: 5px;
+  padding: 1em;
+  z-index: 5;
+  background-color: #f1f1f1;
+}
+
 #toolbox input{
   width: 30px;
   opacity: 0.4;

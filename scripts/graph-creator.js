@@ -4,6 +4,9 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
   // define graphcreator object
   var GraphCreator = function(svg, nodes, edges) {
     var thisGraph = this;
+    console.log('thisGraph:');
+    console.log(thisGraph);
+
     thisGraph.idct = 0;
 
     thisGraph.nodes = nodes || [];
@@ -22,7 +25,7 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
     };
 
     // define arrow markers for graph links
-    var defs = svg.append('svg:defs');
+    var defs = svg.append('defs');
     defs.append('svg:marker')
       .attr('id', 'end-arrow')
       .attr('viewBox', '0 -5 10 10')
@@ -34,7 +37,7 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
       .attr('d', 'M0,-5L10,0L0,5');
 
     //define arrow markers for leading arrow
-    defs.append('svg:marker')
+    defs.append('marker')
       .attr('id', 'mark-end-arrow')
       .attr('viewBox', '0 -5 10 10')
       .attr('refX', 7)
@@ -50,7 +53,7 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
     var svgG = thisGraph.svgG;
 
     // displayed when dragging between nodes
-    thisGraph.dragLine = svgG.append('svg:path')
+    thisGraph.dragLine = svgG.append('path')
       .attr('class', 'link dragline hidden')
       .attr('d', 'M0,0L0,0')
       .style('marker-end', 'url(#mark-end-arrow)');
@@ -59,8 +62,14 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
     thisGraph.paths = svgG.append("g").selectAll("g");
     thisGraph.circles = svgG.append("g").selectAll("g");
 
+    console.log('paths');
+    console.log(thisGraph.paths);
+    console.log('circles');
+    console.log(thisGraph.circles);
+
     thisGraph.drag = d3.behavior.drag()
       .origin(function(d) {
+        // d = selected circle. The drag origin is the origin of the circle
         return {
           x: d.x,
           y: d.y
@@ -70,8 +79,8 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
         thisGraph.state.justDragged = true;
         thisGraph.dragmove.call(thisGraph, args);
       })
-      .on("dragend", function() {
-        // todo check if edge-mode is selected
+      .on("dragend", function(args) {
+        // args = circle that was dragged
       });
 
     // listen for key events
@@ -91,6 +100,7 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
     // listen for dragging
     var dragSvg = d3.behavior.zoom()
       .on("zoom", function() {
+        console.log('zoom triggered');
         if (d3.event.sourceEvent.shiftKey) {
           // TODO  the internal d3 state is still changing
           return false;
@@ -116,6 +126,16 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
     window.onresize = function() {
       thisGraph.updateWindow(svg);
     };
+
+    // reset zoom
+    d3.select("#reset-zoom").on("click", function(){
+      d3.select(".graph")
+        .transition()
+              .duration(1000)
+              .attr('transform', "translate(1,0)");
+      dragSvg.scale(1);
+      dragSvg.translate([1,0]);
+    });
 
     // handle download data
     d3.select("#download-input").on("click", function() {
@@ -274,20 +294,24 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
   };
 
   GraphCreator.prototype.replaceSelectNode = function(d3Node, nodeData) {
+    console.log('replaceSelectNode');
     var thisGraph = this;
     d3Node.classed(this.consts.selectedClass, true);
     if (thisGraph.state.selectedNode) {
       thisGraph.removeSelectFromNode();
     }
     thisGraph.state.selectedNode = nodeData;
+    $('#inspector').removeClass('hidden');
   };
 
   GraphCreator.prototype.removeSelectFromNode = function() {
+    console.log('removeSelectFromNode')
     var thisGraph = this;
     thisGraph.circles.filter(function(cd) {
       return cd.id === thisGraph.state.selectedNode.id;
     }).classed(thisGraph.consts.selectedClass, false);
     thisGraph.state.selectedNode = null;
+    $('#inspector').addClass('hidden');
   };
 
   GraphCreator.prototype.removeSelectFromEdge = function() {
@@ -318,11 +342,17 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
 
   // mousedown on node
   GraphCreator.prototype.circleMouseDown = function(d3node, d) {
+    console.log('mouse down on node')
     var thisGraph = this,
       state = thisGraph.state;
     d3.event.stopPropagation();
     state.mouseDownNode = d;
+
+    // quick and dirty show node details
+    console.log(state);
+
     if (d3.event.shiftKey) {
+      console.log('shift mouse down on node');
       state.shiftNodeDrag = d3.event.shiftKey;
       // reposition dragged directed edge
       thisGraph.dragLine.classed('hidden', false)
@@ -373,6 +403,7 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
 
   // mouseup on nodes
   GraphCreator.prototype.circleMouseUp = function(d3node, d) {
+    console.log('circle mouse up');
     var thisGraph = this,
       state = thisGraph.state,
       consts = thisGraph.consts;
@@ -569,6 +600,8 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
         d3.select(this).classed(consts.connectClass, false);
       })
       .on("mousedown", function(d) {
+        console.log('on mouse down d:');
+        console.log(d);
         thisGraph.circleMouseDown.call(thisGraph, d3.select(this), d);
       })
       .on("mouseup", function(d) {
@@ -607,25 +640,17 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
 
   // warn the user when leaving
   window.onbeforeunload = function() {
-    return "Make sure to save your graph locally before leaving :-)";
+    //return "Make sure to save your graph locally before leaving :-)";
   };
 
   var docEl = document.documentElement,
-    bodyEl = document.getElementsByTagName('div#editorPanel')[0];
+    bodyEl = document.getElementsByTagName('body')[0];
 
-  // var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
-  //   height = window.innerHeight || docEl.clientHeight || bodyEl.clientHeight;
-
-var editorPanel =  document.getElementsById('#editorPanel')[0];
-
-console.log('editor panel');
-console.log(editorPanel);
-
-  var width = editorPanel.clientWidth;
-  var height = editorPanel.clientHeight;
+  var width = window.innerWidth || docEl.clientWidth || bodyEl.clientWidth,
+    height = window.innerHeight || docEl.clientHeight || bodyEl.clientHeight;
 
   var xLoc = width / 2 - 25,
-    yLoc = 100;
+      yLoc = 100;
 
 
   // initial node data
@@ -646,7 +671,7 @@ console.log(editorPanel);
   }];
 
   /** MAIN SVG **/
-  var svg = d3.select("div#editorPanel").append("svg")
+  var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
   var graph = new GraphCreator(svg, nodes, edges);
