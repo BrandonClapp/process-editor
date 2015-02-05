@@ -296,6 +296,7 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
 
   GraphCreator.prototype.replaceSelectNode = function(d3Node, nodeData) {
     console.log('replaceSelectNode');
+
     var thisGraph = this;
     d3Node.classed(this.consts.selectedClass, true);
     if (thisGraph.state.selectedNode) {
@@ -309,13 +310,13 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
     var ds = [{ "Id": 1, "Name":"Value One"}, { "Id": 2, "Name":"Value Two"}, { "Id": 3, "Name":"Value Three"}];
 
     // maybe consolidate this into it's own function.
-    var sel = d3.select("g.selected").append("foreignObject")
-      .attr({ x: 0, y: 0, width: 150, height: 100, id: "inspector"})
+    var sel = d3Node.append("foreignObject")
+      .attr({ x: (thisGraph.consts.nodeRadius), y: (-thisGraph.consts.nodeRadius + 25), width: 130, height: 50, id: "inspector" })
         .append("xhtml:div").append("select");
 
-      sel.selectAll("option").data(ds).enter().append("option")
-        .attr("value", function(d){ return d.Id; })
-        .text(function(d){ return d.Name; });
+    sel.selectAll("option").data(ds).enter().append("option")
+      .attr("value", function(d) { return d.Id; })
+      .text(function(d) { return d.Name; });
   };
 
   GraphCreator.prototype.removeSelectFromNode = function() {
