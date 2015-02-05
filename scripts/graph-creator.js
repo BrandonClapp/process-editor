@@ -130,9 +130,10 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
     // reset zoom
     d3.select("#reset-zoom").on("click", function(){
       d3.select(".graph")
-        .transition()
-              .duration(1000)
+        .transition() // start a transition
+              .duration(1000) // make it last 1 second
               .attr('transform', "translate(1,0)");
+
       dragSvg.scale(1);
       dragSvg.translate([1,0]);
     });
@@ -301,7 +302,33 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
       thisGraph.removeSelectFromNode();
     }
     thisGraph.state.selectedNode = nodeData;
-    $('#inspector').removeClass('hidden');
+
+    // show inspector for selected node.
+    // append a new inspector div to the graph div
+
+console.log('node data');
+console.log(nodeData);
+
+// too tired to finish this.. but it's a start
+    d3.select("g.selected").append("foreignObject")
+        .attr({
+            x: 0,
+            y: 0,
+            width: 150,
+            height: 100,
+            // id: "inspector"
+        }).style({
+            "z-index": 5,
+            "background-color": "blue"
+        }).append("span").text("WTF")
+            .append("input")
+            .attr({
+                type: "text"
+            }).style({
+                "z-index": 6
+            });
+
+            //$('#inspector').removeClass('hidden');
   };
 
   GraphCreator.prototype.removeSelectFromNode = function() {
@@ -343,13 +370,11 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
   // mousedown on node
   GraphCreator.prototype.circleMouseDown = function(d3node, d) {
     console.log('mouse down on node')
+
     var thisGraph = this,
       state = thisGraph.state;
     d3.event.stopPropagation();
     state.mouseDownNode = d;
-
-    // quick and dirty show node details
-    console.log(state);
 
     if (d3.event.shiftKey) {
       console.log('shift mouse down on node');
