@@ -303,32 +303,19 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
     }
     thisGraph.state.selectedNode = nodeData;
 
-    // show inspector for selected node.
-    // append a new inspector div to the graph div
+    // show select for node.
 
-console.log('node data');
-console.log(nodeData);
+    // sample dataset
+    var ds = [{ "Id": 1, "Name":"Value One"}, { "Id": 2, "Name":"Value Two"}, { "Id": 3, "Name":"Value Three"}];
 
-// too tired to finish this.. but it's a start
-    d3.select("g.selected").append("foreignObject")
-        .attr({
-            x: 0,
-            y: 0,
-            width: 150,
-            height: 100,
-            // id: "inspector"
-        }).style({
-            "z-index": 5,
-            "background-color": "blue"
-        }).append("span").text("WTF")
-            .append("input")
-            .attr({
-                type: "text"
-            }).style({
-                "z-index": 6
-            });
+    // maybe consolidate this into it's own function.
+    var sel = d3.select("g.selected").append("foreignObject")
+      .attr({ x: 0, y: 0, width: 150, height: 100, id: "inspector"})
+        .append("xhtml:div").append("select");
 
-            //$('#inspector').removeClass('hidden');
+      sel.selectAll("option").data(ds).enter().append("option")
+        .attr("value", function(d){ return d.Id; })
+        .text(function(d){ return d.Name; });
   };
 
   GraphCreator.prototype.removeSelectFromNode = function() {
