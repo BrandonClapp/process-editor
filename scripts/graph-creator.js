@@ -122,6 +122,11 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
       thisGraph.updateWindow(svg);
     };
 
+    // help icon click
+    d3.select("#help").on("click", function(){
+      $('#helpbox').removeClass('hidden');
+    });
+
     // reset zoom
     d3.select("#reset-zoom").on("click", function(){
       d3.select(".graph")

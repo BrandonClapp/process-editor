@@ -6,7 +6,6 @@
         <link rel="stylesheet" href="styles/graph-creator.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-        <!--Not currently being used-->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 </head>
@@ -17,33 +16,28 @@
 
                 <div id="toolbox">
                         <input type="file" id="hidden-file-upload">
+                        <input id="help" type="image" title="help" src="images/help-icon.png" alt="help">
                         <input id="reset-zoom" type="image" title="reset zoom" src="images/reset-zoom-icon.png" alt="reset zoom">
                         <input id="upload-input" type="image" title="upload graph" src="images/upload-icon.png" alt="upload graph">
                         <input type="image" id="download-input" title="download graph" src="images/download-icon.png" alt="download graph">
                         <input type="image" id="delete-graph" title="delete graph" src="images/trash-icon.png" alt="delete graph">
                 </div>
 
-                <!-- <div id="inspector" class="hidden">
-                        <h4>Process Step Details</h4>
-
-                        <select id="processes">
-                                <option value="process0">Process Step 0</option>
-                                <option value="process1">Process Step 1</option>
-                                <option value="process2">Process Step 2</option>
-                                <option value="process3">Process Step 3</option>
-                        </select>
-
-                </div> -->
+                <div id="helpbox" class="hidden">
+                    <li><strong>Shift + Click</strong> anywhere on the screen (white space) to create a new node.</li>
+                    <li><strong>Shift + Click + Dragging</strong> from one node to another will create a one way connection between them.</li>
+                    <li><strong>Left Clicking</strong> on a node will select it and bring up the inspector on the right hand side, where you can change the event associated with it.</li>
+                    <li><strong>Left Clicking + Dragging</strong> on a node will reposition it.</li>
+                    <li>Selecting a node and pressing <strong>Delete</strong> or <strong>Backspace</strong> will delete the node and any connections to and from it.</li>
+                    <li>Similarly, selecting a connection and pressing <strong>Delete</strong> or <strong>Backspace</strong> will remove the connection.</li>
+                    <li><strong>Mouse Wheel Up</strong> and <strong>Mouse Wheel Down</strong> will zoom the graph accordingly.</li>
+                </div>
+                <script>$('#helpbox').click(function(){ $(this).addClass('hidden'); })</script>
         </div>
 
         <script src="scripts/d3.v3.js" charset="utf-8"></script>
         <script src="scripts/FileSaver.min.js"></script>
         <script src="scripts/graph-creator.js"></script>
-
-        <!--<script src="scripts/bar-graph-test.js"></script>-->
-        <!--<script src="scripts/line-graph-test.js"></script>-->
-        <!--<script src="scripts/scatterplot-graph-test.js"></script>-->
-        <script src="scripts/test.js"></script>
 </body>
 
 </html>

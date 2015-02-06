@@ -29,7 +29,21 @@ body{
   border: 2px solid #EEEEEE;
   border-radius: 5px;
   padding: 1em;
-  z-index: 5;
+}
+
+#helpbox {
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  margin-bottom: 0.5em;
+  margin-left: 1em;
+  border: 2px solid #EEEEEE;
+  border-radius: 5px;
+  padding: 1em;
+}
+
+#helpbox :hover {
+  cursor: pointer;
 }
 
 #inspector{
