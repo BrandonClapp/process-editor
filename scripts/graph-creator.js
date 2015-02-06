@@ -297,6 +297,11 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
   GraphCreator.prototype.replaceSelectNode = function(d3Node, nodeData) {
     console.log('replaceSelectNode');
 
+    console.log('d3Node:')
+    console.log(d3Node);
+    console.log('nodeData:');
+    console.log(nodeData);
+
     var thisGraph = this;
     d3Node.classed(this.consts.selectedClass, true);
     if (thisGraph.state.selectedNode) {
@@ -376,6 +381,9 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
 
   /* place editable text on node in place of svg text */
   GraphCreator.prototype.changeTextOfNode = function(d3node, d) {
+      console.log('cannot change text of node.');
+      return; //todo fix this properly.
+
     var thisGraph = this,
       consts = thisGraph.consts,
       htmlEl = d3node.node();
@@ -598,7 +606,8 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
 
     // add new nodes
     var newGs = thisGraph.circles.enter()
-      .append("g");
+      .append("g")
+        .attr({"id": function(d){ return generateUUID(); }});
 
     newGs.classed(consts.circleGClass, true)
       .attr("transform", function(d) {
@@ -691,3 +700,13 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
   graph.setIdCt(2);
   graph.updateGraph();
 })(window.d3, window.saveAs, window.Blob);
+
+function generateUUID() {
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (d + Math.random()*16)%16 | 0;
+        d = Math.floor(d/16);
+        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+};
