@@ -310,14 +310,14 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
       var inspector = d3.select("div#container").append("div").attr({ id: "inspector"});
       var sel = inspector.append("select")
           .on("change", function(){
-            // Get option value and text
+            // Update thisGraph.nodes and graph text with selected option.
             var selectedOption = this.options[this.selectedIndex];
             // selectedOption.value & selectedOption.text
 
-            // var gText = d3.select("g.selected text").remove(); //this works!!!!!
             d3Node.select("text").remove();
             thisGraph.insertTitleLinebreaks(d3Node, selectedOption.text);
-             // Update node ID and text.
+            nodeData.eventTypeId = selectedOption.value;
+            nodeData.title = selectedOption.text;
           });
       var options = sel.selectAll("option").data(json).enter()
           .append("option")
@@ -465,9 +465,10 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
       var xycoords = d3.mouse(thisGraph.svgG.node()),
         d = {
           id: thisGraph.idct++,
-          title: "Select Process Map Step",
+          title: "",
           x: xycoords[0],
-          y: xycoords[1]
+          y: xycoords[1],
+          eventTypeId: null
         };
       thisGraph.nodes.push(d);
       thisGraph.updateGraph();
@@ -635,12 +636,14 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
     title: "Process Map Step 1",
     id: 0,
     x: xLoc,
-    y: yLoc
+    y: yLoc,
+    eventTypeId: null
   }, {
     title: "Process Map Step 2",
     id: 1,
     x: xLoc,
-    y: yLoc + 200
+    y: yLoc + 200,
+    eventTypeId: null
   }];
   var edges = [{
     source: nodes[0],
