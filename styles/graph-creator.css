@@ -34,15 +34,15 @@ body{
 
 #inspector{
   position: absolute;
-  /*top: 0;
-  right: 0;*/
+  top: 0;
+  right: 0;
   margin-bottom: 0.5em;
   margin-left: 1em;
-  border: 2px solid blue;
-  border-radius: 5px;
+  border-left: 2px solid #B94851;
   padding: 1em;
   z-index: 5;
   background-color: #f1f1f1;
+  height: 100%;
 }
 
 #toolbox input{

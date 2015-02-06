@@ -62,11 +62,6 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
     thisGraph.paths = svgG.append("g").selectAll("g");
     thisGraph.circles = svgG.append("g").selectAll("g");
 
-    console.log('paths');
-    console.log(thisGraph.paths);
-    console.log('circles');
-    console.log(thisGraph.circles);
-
     thisGraph.drag = d3.behavior.drag()
       .origin(function(d) {
         // d = selected circle. The drag origin is the origin of the circle
@@ -295,37 +290,16 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
   };
 
   GraphCreator.prototype.replaceSelectNode = function(d3Node, nodeData) {
-    console.log('replaceSelectNode');
-
-    console.log('d3Node:')
-    console.log(d3Node);
-    console.log('nodeData:');
-    console.log(nodeData);
-
     var thisGraph = this;
     d3Node.classed(this.consts.selectedClass, true);
     if (thisGraph.state.selectedNode) {
       thisGraph.removeSelectFromNode();
     }
     thisGraph.state.selectedNode = nodeData;
-
-    // show select for node.
-
-    // sample dataset
-    var ds = [{ "Id": 1, "Name":"Value One"}, { "Id": 2, "Name":"Value Two"}, { "Id": 3, "Name":"Value Three"}];
-
-    // maybe consolidate this into it's own function.
-    var sel = d3Node.append("foreignObject")
-      .attr({ x: (thisGraph.consts.nodeRadius), y: (-thisGraph.consts.nodeRadius + 25), width: 130, height: 50, id: "inspector" })
-        .append("xhtml:div").append("select");
-
-    sel.selectAll("option").data(ds).enter().append("option")
-      .attr("value", function(d) { return d.Id; })
-      .text(function(d) { return d.Name; });
+    $('#inspector').removeClass('hidden');
   };
 
   GraphCreator.prototype.removeSelectFromNode = function() {
-    console.log('removeSelectFromNode')
     var thisGraph = this;
     thisGraph.circles.filter(function(cd) {
       return cd.id === thisGraph.state.selectedNode.id;
@@ -362,64 +336,19 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
 
   // mousedown on node
   GraphCreator.prototype.circleMouseDown = function(d3node, d) {
-    console.log('mouse down on node')
-
     var thisGraph = this,
       state = thisGraph.state;
     d3.event.stopPropagation();
     state.mouseDownNode = d;
 
     if (d3.event.shiftKey) {
-      console.log('shift mouse down on node');
+        // Automatically create node when they shift + drag?
       state.shiftNodeDrag = d3.event.shiftKey;
       // reposition dragged directed edge
       thisGraph.dragLine.classed('hidden', false)
         .attr('d', 'M' + d.x + ',' + d.y + 'L' + d.x + ',' + d.y);
       return;
     }
-  };
-
-  /* place editable text on node in place of svg text */
-  GraphCreator.prototype.changeTextOfNode = function(d3node, d) {
-      console.log('cannot change text of node.');
-      return; //todo fix this properly.
-
-    var thisGraph = this,
-      consts = thisGraph.consts,
-      htmlEl = d3node.node();
-    d3node.selectAll("text").remove();
-    var nodeBCR = htmlEl.getBoundingClientRect(),
-      curScale = nodeBCR.width / consts.nodeRadius,
-      placePad = 5 * curScale,
-      useHW = curScale > 1 ? nodeBCR.width * 0.71 : consts.nodeRadius * 1.42;
-    // replace with editableconent text
-    var d3txt = thisGraph.svg.selectAll("foreignObject")
-      .data([d])
-      .enter()
-      .append("foreignObject")
-      .attr("x", nodeBCR.left + placePad)
-      .attr("y", nodeBCR.top + placePad)
-      .attr("height", 2 * useHW)
-      .attr("width", useHW)
-      .append("xhtml:p")
-      .attr("id", consts.activeEditId)
-      .attr("contentEditable", "true")
-      .text(d.title)
-      .on("mousedown", function(d) {
-        d3.event.stopPropagation();
-      })
-      .on("keydown", function(d) {
-        d3.event.stopPropagation();
-        if (d3.event.keyCode == consts.ENTER_KEY && !d3.event.shiftKey) {
-          this.blur();
-        }
-      })
-      .on("blur", function(d) {
-        d.title = this.textContent;
-        thisGraph.insertTitleLinebreaks(d3node, d.title);
-        d3.select(this.parentElement).remove();
-      });
-    return d3txt;
   };
 
   // mouseup on nodes
@@ -463,10 +392,11 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
         // clicked, not dragged
         if (d3.event.shiftKey) {
           // shift-clicked node: edit text content
-          var d3txt = thisGraph.changeTextOfNode(d3node, d);
-          var txtNode = d3txt.node();
-          thisGraph.selectElementContents(txtNode);
-          txtNode.focus();
+        //   var d3txt = thisGraph.changeTextOfNode(d3node, d);
+        //   var txtNode = d3txt.node();
+        //   thisGraph.selectElementContents(txtNode);
+        //   txtNode.focus();
+
         } else {
           if (state.selectedEdge) {
             thisGraph.removeSelectFromEdge();
@@ -509,13 +439,6 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
         };
       thisGraph.nodes.push(d);
       thisGraph.updateGraph();
-      // make title of text immediently editable
-      var d3txt = thisGraph.changeTextOfNode(thisGraph.circles.filter(function(dval) {
-          return dval.id === d.id;
-        }), d),
-        txtNode = d3txt.node();
-      thisGraph.selectElementContents(txtNode);
-      txtNode.focus();
     } else if (state.shiftNodeDrag) {
       // dragged from node
       state.shiftNodeDrag = false;
