@@ -296,7 +296,21 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
       thisGraph.removeSelectFromNode();
     }
     thisGraph.state.selectedNode = nodeData;
-    $('#inspector').removeClass('hidden');
+    //$('#inspector').removeClass('hidden');
+
+    // select the container class, append new div with id of inspector
+    // append select box with ds options
+    var ds = [{ "Id": 1, "Name":"Value One"}, { "Id": 2, "Name":"Value Two"}, { "Id": 3, "Name":"Value Three"}];
+
+    var inspector = d3.select("div#container").append("div").attr({ id: "inspector"});
+    var sel = inspector.append("select")
+        .on("change", function(d){ alert('Inspector select changed for '
+        + window.JSON.stringify(nodeData)) });
+    var options = sel.selectAll("option").data(ds).enter()
+        .append("option")
+            .attr({value: function(d){ return d.Id }})
+            .text(function(d){ return d.Name });
+
   };
 
   GraphCreator.prototype.removeSelectFromNode = function() {
@@ -305,7 +319,7 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
       return cd.id === thisGraph.state.selectedNode.id;
     }).classed(thisGraph.consts.selectedClass, false);
     thisGraph.state.selectedNode = null;
-    $('#inspector').addClass('hidden');
+    //$('#inspector').addClass('hidden');
   };
 
   GraphCreator.prototype.removeSelectFromEdge = function() {
