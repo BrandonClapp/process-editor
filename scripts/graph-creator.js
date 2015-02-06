@@ -323,9 +323,11 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
             // console.log(thisGraph.nodes);
 
           });
+
+          sel.append("option").attr({ value: '' }).text("");
       var options = sel.selectAll("option");
 
-      options.append("option").attr({ value: '' }).text("-");
+
       options.data(json).enter()
           .append("option")
               .attr({value: function(d){ return d.Key }})
