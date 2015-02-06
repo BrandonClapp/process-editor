@@ -1,235 +1,31 @@
 [{
+  "Key": null,
+  "Value": ""
+}, {
   "Key": 0,
-  "Value": "Done"
+  "Value": "Start"
 }, {
   "Key": 1,
-  "Value": "IE20 Indexed"
+  "Value": "Finish"
 }, {
   "Key": 2,
-  "Value": "IE20 Unindexed"
+  "Value": "Stop"
 }, {
   "Key": 3,
-  "Value": "Online Index"
+  "Value": "Go"
 }, {
   "Key": 4,
-  "Value": "Online Double Key Verify"
+  "Value": "Review"
 }, {
   "Key": 6,
-  "Value": "Email Import"
+  "Value": "Test"
 }, {
   "Key": 7,
-  "Value": "Location Batch Assignment"
+  "Value": "Do a little dance"
 }, {
   "Key": 8,
-  "Value": "Process Bar Codes"
+  "Value": "Make a little love"
 }, {
   "Key": 9,
-  "Value": "PDF To TIFF Converter"
-}, {
-  "Key": 10,
-  "Value": "Export To Document Table"
-}, {
-  "Key": 11,
-  "Value": "Image Clean Up"
-}, {
-  "Key": 12,
-  "Value": "Scan"
-}, {
-  "Key": 13,
-  "Value": "QC"
-}, {
-  "Key": 14,
-  "Value": "Process Barcodes Auto Complete"
-}, {
-  "Key": 16,
-  "Value": "Client Enhance"
-}, {
-  "Key": 17,
-  "Value": "Server Enhance"
-}, {
-  "Key": 18,
-  "Value": "Zip Unindexed Import"
-}, {
-  "Key": 19,
-  "Value": "Zip Indexed Import"
-}, {
-  "Key": 20,
-  "Value": "Ascii Unindexed Import"
-}, {
-  "Key": 21,
-  "Value": "Ascii Indexed Import"
-}, {
-  "Key": 22,
-  "Value": "Content Index OCR Input"
-}, {
-  "Key": 23,
-  "Value": "Content Index OCR Output"
-}, {
-  "Key": 24,
-  "Value": "Index Loan Data"
-}, {
-  "Key": 25,
-  "Value": "Custom Import"
-}, {
-  "Key": 26,
-  "Value": "Custom WF Injector"
-}, {
-  "Key": 27,
-  "Value": "Custom Export"
-}, {
-  "Key": 28,
-  "Value": "EPID Upload Indexed"
-}, {
-  "Key": 29,
-  "Value": "EPID Upload Unindexed"
-}, {
-  "Key": 30,
-  "Value": "Bulk Zip Unindexed Import"
-}, {
-  "Key": 31,
-  "Value": "Bulk Zip Indexed Import"
-}, {
-  "Key": 32,
-  "Value": "Batch Notification"
-}, {
-  "Key": 33,
-  "Value": "WF DocInjector"
-}, {
-  "Key": 34,
-  "Value": "Scrape Text"
-}, {
-  "Key": 35,
-  "Value": "Forms Processing"
-}, {
-  "Key": 36,
-  "Value": "Web Index"
-}, {
-  "Key": 36,
-  "Value": "Web Index"
-}, {
-  "Key": 37,
-  "Value": "Forms Recognition"
-}, {
-  "Key": 38,
-  "Value": "FPI Batch"
-}, {
-  "Key": 39,
-  "Value": "Ocr Pre Process"
-}, {
-  "Key": 40,
-  "Value": "Skelta WF DocInjector"
-}, {
-  "Key": 41,
-  "Value": "Route Batch"
-}, {
-  "Key": 42,
-  "Value": "Forms Audit"
-}, {
-  "Key": 43,
-  "Value": "Batch Delete"
-}, {
-  "Key": 44,
-  "Value": "Blank Page Del"
-}, {
-  "Key": 45,
-  "Value": "Batch Cleanup"
-}, {
-  "Key": 46,
-  "Value": "SQL Runner"
-}, {
-  "Key": 47,
-  "Value": "Meta Data Discovery"
-}, {
-  "Key": 48,
-  "Value": "Publish Document Link"
-}, {
-  "Key": 49,
-  "Value": "Scrape Text TOCR"
-}, {
-  "Key": 50,
-  "Value": "FP Sync"
-}, {
-  "Key": 51,
-  "Value": "Caching Svc"
-}, {
-  "Key": 52,
-  "Value": "Cmd Runner"
-}, {
-  "Key": 53,
-  "Value": "Batch Move"
-}, {
-  "Key": 54,
-  "Value": "FP Adjust Image Quality"
-}, {
-  "Key": 55,
-  "Value": "Wait"
-}, {
-  "Key": 56,
-  "Value": "Encapture Batch Delivery"
-}, {
-  "Key": 57,
-  "Value": "Auto Rotate"
-}, {
-  "Key": 58,
-  "Value": "Batch Notication2"
-}, {
-  "Key": 59,
-  "Value": "AV Transfer Service"
-}, {
-  "Key": 60,
-  "Value": "AV Transfer Cleanup Service"
-}, {
-  "Key": 61,
-  "Value": "AV Transfer Package Injector"
-}, {
-  "Key": 62,
-  "Value": "Create Document Inline"
-}, {
-  "Key": 63,
-  "Value": "Cloud Ocr Send"
-}, {
-  "Key": 64,
-  "Value": "Web Double Key Verify"
-}, {
-  "Key": 65,
-  "Value": "Cloud Ocr Receive"
-}, {
-  "Key": -36,
-  "Value": "WF Document Injector"
-}, {
-  "Key": -35,
-  "Value": "WF Batch Injector"
-}, {
-  "Key": -34,
-  "Value": "Custom WF Injector 2"
-}, {
-  "Key": -17,
-  "Value": "Process Barcodes 2"
-}, {
-  "Key": -16,
-  "Value": "Bulk Import"
-}, {
-  "Key": -15,
-  "Value": "Email Import Custom"
-}, {
-  "Key": -14,
-  "Value": "C Email Import"
-}, {
-  "Key": -13,
-  "Value": "SNB Batch Release"
-}, {
-  "Key": -12,
-  "Value": "Move Batch"
-}, {
-  "Key": -11,
-  "Value": "Doc Maker Custom"
-}, {
-  "Key": -10,
-  "Value": "ReIndex Batch"
-}, {
-  "Key": -9,
-  "Value": "ReIndex Custom Doc"
-}, {
-  "Key": -1,
-  "Value": "Not Available"
+  "Value": "Get down tonight"
 }]

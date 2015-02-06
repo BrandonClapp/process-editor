@@ -329,9 +329,8 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
 
           });
 
-          sel.append("option").attr({ value: '' }).text("");
-      var options = sel.selectAll("option");
 
+      var options = sel.selectAll("option");      
 
       options.data(json).enter()
           .append("option")
