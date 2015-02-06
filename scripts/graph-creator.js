@@ -290,36 +290,58 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
   };
 
   GraphCreator.prototype.replaceSelectNode = function(d3Node, nodeData) {
+    // A circle node has been selected.
+
     var thisGraph = this;
     d3Node.classed(this.consts.selectedClass, true);
     if (thisGraph.state.selectedNode) {
       thisGraph.removeSelectFromNode();
     }
     thisGraph.state.selectedNode = nodeData;
-    //$('#inspector').removeClass('hidden');
 
-    // select the container class, append new div with id of inspector
-    // append select box with ds options
-    var ds = [{ "Id": 1, "Name":"Value One"}, { "Id": 2, "Name":"Value Two"}, { "Id": 3, "Name":"Value Three"}];
+    d3.json("scripts/processes.json", function(error, json){
 
-    var inspector = d3.select("div#container").append("div").attr({ id: "inspector"});
-    var sel = inspector.append("select")
-        .on("change", function(d){ alert('Inspector select changed for '
-        + window.JSON.stringify(nodeData)) });
-    var options = sel.selectAll("option").data(ds).enter()
-        .append("option")
-            .attr({value: function(d){ return d.Id }})
-            .text(function(d){ return d.Name });
+      if(error){
+        alert("Error occured while getting processes. Check console for details.");
+        console.log(error);
+        return;
+      }
 
+      var inspector = d3.select("div#container").append("div").attr({ id: "inspector"});
+      var sel = inspector.append("select")
+          .on("change", function(){
+            // Get option value and text
+            var selectedOption = this.options[this.selectedIndex];
+            // selectedOption.value & selectedOption.text
+
+            // Apparently d3Node does not update thisGraph.nodes list.
+            d3Node.title = selectedOption.text;
+            d3Node.id = selectedOption.value;
+            // change the svg text here.
+
+            console.log('thisGraph.nodes:');
+            console.log(thisGraph.nodes);
+             // Update node ID and text.
+          });
+      var options = sel.selectAll("option").data(json).enter()
+          .append("option")
+              .attr({value: function(d){ return d.Key }})
+              .text(function(d){ return d.Value });
+
+    });
   };
 
   GraphCreator.prototype.removeSelectFromNode = function() {
+    // A circle node has been deselected.
+
     var thisGraph = this;
     thisGraph.circles.filter(function(cd) {
       return cd.id === thisGraph.state.selectedNode.id;
     }).classed(thisGraph.consts.selectedClass, false);
     thisGraph.state.selectedNode = null;
-    //$('#inspector').addClass('hidden');
+
+    d3.selectAll("div#inspector").remove();
+
   };
 
   GraphCreator.prototype.removeSelectFromEdge = function() {
