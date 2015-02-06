@@ -314,13 +314,9 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
             var selectedOption = this.options[this.selectedIndex];
             // selectedOption.value & selectedOption.text
 
-            // Apparently d3Node does not update thisGraph.nodes list.
-            d3Node.title = selectedOption.text;
-            d3Node.id = selectedOption.value;
-            // change the svg text here.
-
-            console.log('thisGraph.nodes:');
-            console.log(thisGraph.nodes);
+            // var gText = d3.select("g.selected text").remove(); //this works!!!!!
+            d3Node.select("text").remove();
+            thisGraph.insertTitleLinebreaks(d3Node, selectedOption.text);
              // Update node ID and text.
           });
       var options = sel.selectAll("option").data(json).enter()
