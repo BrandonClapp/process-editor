@@ -309,20 +309,30 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
 
       var inspector = d3.select("div#container").append("div").attr({ id: "inspector"});
       var sel = inspector.append("select")
-          .on("change", function(){
+          .on("change", function(d){
             // Update thisGraph.nodes and graph text with selected option.
             var selectedOption = this.options[this.selectedIndex];
             // selectedOption.value & selectedOption.text
 
             d3Node.select("text").remove();
             thisGraph.insertTitleLinebreaks(d3Node, selectedOption.text);
-            nodeData.eventTypeId = selectedOption.value;
+            nodeData.eventTypeId = parseInt(selectedOption.value);
             nodeData.title = selectedOption.text;
+
+            // console.log('thisGraph.nodes');
+            // console.log(thisGraph.nodes);
+
           });
-      var options = sel.selectAll("option").data(json).enter()
+      var options = sel.selectAll("option");
+
+      options.append("option").attr({ value: '' }).text("-");
+      options.data(json).enter()
           .append("option")
               .attr({value: function(d){ return d.Key }})
-              .text(function(d){ return d.Value });
+              .text(function(d){ return d.Value })
+          .property("selected", function(d, i){
+                return d.Key === nodeData.eventTypeId;
+          });
 
     });
   };
