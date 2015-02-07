@@ -12,20 +12,38 @@
   "Value": "Stop"
 }, {
   "Key": 3,
-  "Value": "Go"
+  "Value": "Land on Estate"
 }, {
   "Key": 4,
-  "Value": "Review"
+  "Value": "If"
 }, {
   "Key": 6,
-  "Value": "Test"
+  "Value": "Else"
 }, {
   "Key": 7,
-  "Value": "Do a little dance"
+  "Value": "Pass Go"
 }, {
   "Key": 8,
-  "Value": "Make a little love"
+  "Value": "Collect $200"
 }, {
   "Key": 9,
-  "Value": "Get down tonight"
+  "Value": "Go Directly To Jail!"
+},{
+  "Key": 10,
+  "Value": "Roll Die"
+},{
+  "Key": 11,
+  "Value": "Rolled Doubles"
+},{
+  "Key": 12,
+  "Value": "Move Piece"
+},{
+  "Key": 13,
+  "Value": "Is Owned By Someone"
+},{
+  "Key": 14,
+  "Value": "Pay the Piper!"
+},{
+  "Key": 15,
+  "Value": "Buy It!"
 }]

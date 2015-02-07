@@ -306,6 +306,8 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
 
     d3.json("scripts/processes.json", function(error, json){
 
+      json = _.sortBy(json, function(d){ return d.Value })
+
       if(error){
         alert("Error occured while getting processes. Check console for details.");
         console.log(error);
@@ -330,7 +332,7 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
           });
 
 
-      var options = sel.selectAll("option");      
+      var options = sel.selectAll("option");
 
       options.data(json).enter()
           .append("option")
