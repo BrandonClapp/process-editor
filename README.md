@@ -18,3 +18,6 @@ Flow chart editor built on d3.js
 
 Charts can be saved, as well as opened, in the bottom left hand corner. Each chart is saved and opened with a .json file containing basic node and connection information.
 
+### Installation
+- Download and extract the project zip, or git clone, into a any web server directory.
+
