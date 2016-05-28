@@ -1,7 +1,7 @@
 # Process-Editor
 Flow chart editor built on d3.js
 
-[Demo](http://brandonclapp.com/processeditor)
+[Demo](http://brandonclapp.github.io/process-editor/)
 
 ### Usage
 
@@ -20,4 +20,3 @@ Charts can be saved, as well as opened, in the bottom left hand corner. Each cha
 
 ### Installation
 - Download and extract the project zip, or git clone, into a any web server directory.
-
